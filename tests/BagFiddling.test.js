@@ -63,7 +63,7 @@ export function groupFlights({ by }) {
 }
 
 describe('Launch Queries', () => {
-  it('can show ', () => {
+  it('gives the mission and rocket grouped by ID', () => {
     const byID = rocketMissionNames(groupFlights({ by: 'id' }))
     console.log('byID', byID)
     expect(byID)
@@ -90,7 +90,7 @@ describe('Launch Queries', () => {
       })
   })
 
-  it('can show ', () => {
+  it('gives the mission and rocket grouped by Mission Name', () => {
     const byRocketName = rocketMissionNames(groupFlights({ by: 'rocketName' }))
     console.log('rocketName', byRocketName)
     expect(byRocketName)

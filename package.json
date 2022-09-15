@@ -7,9 +7,8 @@
   "license": "ALL RIGHTS RESERVED",
   "scripts": {
     "start": "nodemon app.js localhost 8080",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "tt": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
-    "twitch": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll"
+    "test": "NODE_OPTIONS=--experimental-vm-modules yarn jest",
+    "twitch": "NODE_OPTIONS=--experimental-vm-modules yarn jest --watchAll"
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
