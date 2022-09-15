@@ -1,17 +1,24 @@
 {
-  histories {
-    flight {
-      id
+  launches(limit: 18, offset: 15) {
+    rocket {
+      rocket_name
+      rocket_type
       rocket {
-        fairings {
-          recovered
-          recovery_attempt
-          reused
-          ship
-        }
-        rocket_name
+        id
       }
-      mission_name
     }
+    mission_name
+    launch_success
+    launch_date_utc
+    launch_site {
+      site_id
+      site_name_long
+      site_name
+    }
+    ships {
+      id
+    }
+    mission_id
+    id
   }
 }

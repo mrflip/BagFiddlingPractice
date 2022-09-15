@@ -1,26 +1,63 @@
-import * as _ from 'lodash'
-import SpacexQuery1 from './SpacexQuery1'
+import _ from 'lodash'
+import SpacexQuery1 from '../src/SpacexQuery1'
+// import * as ProcessBag from './ProcessBag'
 
-// Normally you write code in src/ and test it in tests/
-// but for this exercise ignore this file and instead
-// just work in tests/BagFiddling.test.js
+const SpacexFlights = SpacexQuery1.data.launches
 
-// this works because the IDs are distinct
-export function flightsByID() {
-  return _.mapKeys(SpacexQuery1.data.histories, 'flight.id')
+//
+// Code part -- normally this would be in ProcessBag.js but
+// for this exercise you will just work in this file.
+
+export function scrubNil(bag) {
+  return _.omitBy(bag, _.isNil)
 }
 
+export function rocketMissionName(flight) {
+  if (!flight) {
+    return '(none)'
+  }
+  const { mission_name, rocket } = flight
+  const { rocket_name = '(none)' } = rocket || ''
+  return `${mission_name} - ${rocket_name}`
+}
+
+export function rocketMissionNames(flightListsBag) {
+  // return _.mapValues(flightListsBag, (flights) => _.map(flights, (flight) => rocketMissionName(flight)))
+  // the line above is the wordier equivalent of this:
+  return _.mapValues(flightListsBag, (flights) =>
+    _.map(flights, rocketMissionName),
+  )
+}
+
+// Take all the flights and reassemble them into a bag with IDs as key and a list of launches.
+// { "4": [...launches for it], ...}
+// The following works because the IDs are distinct:
+export function flightsByID() {
+  const oneFlightPerID = _.mapKeys(SpacexFlights, 'id')
+  const allFlightsPerID = _.mapValues(oneFlightPerID, (flight) => [flight])
+  return scrubNil(allFlightsPerID)
+}
+
+// Take take all the flights and reassemble them into a bag { "Falcon 1": [...launches for it], ...}
 // FIXME -- this does not work, because it returns only one flight per rocket name
-// the lodash _.groupBy method will do what you want.
-// Usually you write code in one file and tests in another but just switch to the
-// test file to figure out how to do this correctly
+// figure out how to use lodash to make the tests pass.
 export function flightsByRocketName() {
-  return _.mapKeys(SpacexQuery1.data.histories, 'flight.rocket.rocket_name')
+  const perRocketName = _.mapKeys(SpacexFlights, 'rocket.rocket_name')
+  const allPerRocketName = _.mapValues(perRocketName, (flight) => [flight])
+  return scrubNil(allPerRocketName)
 }
 
 const Groupers = {
-  byID: flightsByID,
-  byRocketName: flightsByRocketName,
+  id: flightsByID,
+  rocketName: flightsByRocketName,
 }
 
-export function foo() {}
+export function groupFlights({ by }) {
+  const grouper = Groupers[by]
+  if (!grouper) {
+    throw new Error(
+      `Cannot group by ${by}, please use one of ${_.keys(Groupers).join(', ')}`,
+    )
+  }
+  return grouper()
+}
