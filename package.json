@@ -1,31 +1,35 @@
 {
   "name": "bagfiddlingpractice",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "license": "ALL RIGHTS RESERVED",
   "scripts": {
     "start": "nodemon app.js localhost 8080",
-    "test": "jest --watch",
+    "test": "jest --watchAll",
     "twitch": "jest --watch"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./tests/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "./tests/setupTests.js"
+    ]
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1",
-    "lodash": "4.17.21"
+    "lodash": "4.17.21",
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "chai-as-promised": "7.1.1",
     "@types/chai": "4.2.4",
     "@types/chai-as-promised": "7.1.2",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
     "jest": "24.9.0",
     "nodemon": "1.18.4"
   },
-  "keywords": []
+  "keywords": [],
+  "packageManager": "yarn@3.2.3"
 }

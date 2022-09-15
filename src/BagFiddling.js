@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import SpacexQuery1 from './SpacexQuery1'
+import SpacexQuery1 from './SpacexQuery1.js'
 
 // Normally you write code in src/ and test it in tests/
 // but for this exercise ignore this file and instead

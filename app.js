@@ -1,22 +1,22 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+import Express from 'express'
+import JSPath from 'path'
+import CookieParser from 'cookie-parser'
+import Logger from 'morgan'
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+import IndexRouter from './routes/index.js'
+import UsersRouter from './routes/users.js'
 
-var app = express();
+const App = Express()
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(Logger('dev'))
+app.use(Express.json())
+app.use(Express.urlencoded({ extended: false }))
+app.use(CookieParser())
+app.use(Express.static(JSPath.join(__dirname, 'public')))
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use('/', IndexRouter)
+app.use('/users', UsersRouter)
 
-var listener = app.listen(8080, function() {
-  console.log("Listening on port " + listener.address().port);
-});
+const listener = App.listen(8080, function () {
+  console.log('Listening on port ' + listener.address().port)
+})
