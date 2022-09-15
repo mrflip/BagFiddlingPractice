@@ -8,6 +8,7 @@
   "scripts": {
     "start": "nodemon app.js localhost 8080",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "tt": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
     "twitch": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll"
   },
   "dependencies": {
