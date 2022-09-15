@@ -1,0 +1,17 @@
+{
+  histories {
+    flight {
+      id
+      rocket {
+        fairings {
+          recovered
+          recovery_attempt
+          reused
+          ship
+        }
+        rocket_name
+      }
+      mission_name
+    }
+  }
+}
