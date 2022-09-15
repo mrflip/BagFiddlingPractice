@@ -6,3 +6,4 @@ import chaiAsPromised from 'chai-as-promised'
 chai.should()
 
 chai.use(chaiAsPromised)
+Error.stackTraceLimit = 50
