@@ -6,10 +6,17 @@ import SpacexQuery1 from '../src/SpacexQuery1'
 // Code part -- normally this would be in ProcessBag.js but
 // for this exercise you will just work in this file.
 
+export function scrubNil(bag) {
+  return _.omitBy(bag, _.isNil)
+}
+
 // this works because the IDs are distinct
 export function flightsByID() {
   const oneFlightPerID = _.mapKeys(SpacexQuery1.data.histories, 'flight.id')
-  const allFlightsPerID = _.map(oneFlightPerID, (flight) => [flight]) // a list of length 1
+  const allFlightsPerID = _.mapValues(oneFlightPerID, (flight) => [
+    flight?.flight,
+  ]) // a list of length 1
+  return scrubNil(allFlightsPerID)
 }
 
 export function rocketMissionName(flight) {
@@ -44,15 +51,15 @@ export function groupFlights({ by }) {
 describe('Launch Queries', () => {
   it('can show ', () => {
     const byID = Groupers.id()
-    console.error(byID)
-    const data = { num: 3 }
-    expect(data).property('num').to.be.a('number').lt(5).and.not.gt(99)
+    console.error(
+      _.mapValues(byID, (flights) => _.map(flights, rocketMissionName)),
+    )
   })
 
-  describe('groupFlights', () => {
-    it('returns flights by id', () => {
-      const result = groupFlights({ by: 'id' })
-      expect(result).to.eql({})
-    })
-  })
+  //   describe('groupFlights', () => {
+  //     it('returns flights by id', () => {
+  //       const result = groupFlights({ by: 'id' })
+  //       expect(result).to.eql({})
+  //     })
+  //   })
 })
