@@ -27,23 +27,23 @@ describe('Playground', () => {
     const doubleStr2 = [str, str].join('')
     const doubleStr3 = `${str}${str}`
     //
-    doubleStr1.should.be.a('string').eql('hellohello')
-    doubleStr2.should.be.a('string').eql('hellohello')
-    doubleStr3.should.be.a('string').eql('hellohello')
+    expect(doubleStr1).to.be.a('string').eql('hellohello')
+    expect(doubleStr2).to.be.a('string').eql('hellohello')
+    expect(doubleStr3).to.be.a('string').eql('hellohello')
   })
 
   it('chai with nubmers', () => {
     const { num } = data
-    num.should.be.a('number').gte(1)
-    data.property('num').should.be.a('number').lt(5).and.not.gt(99)
+    expect(num).to.be.a('number').gte(1)
+    expect(data).property('num').to.be.a('number').lt(5).and.not.gt(99)
   })
 
-  it('should not be a number', () => {
+  it('to not be a number', () => {
     const { nan } = data
-    nan.should.be.NaN
+    expect(nan).to.be.NaN
   })
 
-  it('should use chai-as-promised', () => {
-    return data.promise.should.eventually.equal(true)
+  it('to use chai-as-promised', () => {
+    return expect(data).property('promise').to.eventually.equal(true)
   })
 })

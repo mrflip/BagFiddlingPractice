@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 import SpacexQuery1 from '../src/SpacexQuery1'
 // import * as ProcessBag from './ProcessBag'
 
@@ -8,15 +8,14 @@ import SpacexQuery1 from '../src/SpacexQuery1'
 
 // this works because the IDs are distinct
 export function flightsByID() {
-  const oneFlightPerID _.mapKeys(SpacexQuery1.data.histories, 'flight.id')
-  const allFlightsPerID = _.map(oneFlightPerID, (flight) => ([flight])) // a list of length 1
-
+  const oneFlightPerID = _.mapKeys(SpacexQuery1.data.histories, 'flight.id')
+  const allFlightsPerID = _.map(oneFlightPerID, (flight) => [flight]) // a list of length 1
 }
 
-export rocketMissionName(flight) {
+export function rocketMissionName(flight) {
   const { mission_name, rocket } = flight
   const { rocket_name } = rocket
-  return `${mission_name} - ${rocketName}`
+  return `${mission_name} - ${rocket_name}`
 }
 
 // FIXME -- this does not work, because it returns only one flight per rocket name
@@ -44,10 +43,10 @@ export function groupFlights({ by }) {
 
 describe('Launch Queries', () => {
   it('can show ', () => {
-    const byID = Groupers.byID()
+    const byID = Groupers.id()
     console.error(byID)
     const data = { num: 3 }
-    data.property('num').should.be.a('number').lt(5).and.not.gt(99)
+    expect(data).property('num').to.be.a('number').lt(5).and.not.gt(99)
   })
 
   describe('groupFlights', () => {

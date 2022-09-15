@@ -7,13 +7,8 @@
   "license": "ALL RIGHTS RESERVED",
   "scripts": {
     "start": "nodemon app.js localhost 8080",
-    "test": "jest --watchAll",
-    "twitch": "jest --watchAll"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./tests/setupTests.js"
-    ]
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "twitch": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll"
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
