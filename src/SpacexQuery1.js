@@ -470,4 +470,5 @@ export const SpacexQuery1 = {
     ],
   },
 }
+
 export default SpacexQuery1
